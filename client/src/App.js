@@ -1,25 +1,24 @@
-import React from 'react';
-import {Switch,Route} from 'react-router-dom';
-// import { Login } from './components/login';
-import Login_smart from './containers/login_container';
-import { Landing } from './components/landing';
-import  SignUp  from './components/signup';
-import {Dashboard} from './containers/Dashboard';
-import  AuthComponent  from './containers/AuthComponent';
-export  class App extends React.Component{
-  render(){
-    return (
-      <div>
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import Header from "./components/header/Header.jsx"
+import Home from "./components/home/Home.jsx"
+import {TemplateProvider} from './templates/TemplateProvider.js'
+import ContextProvider from './context/contextProvider.jsx'
+
+function App() {
+  return (
+    <TemplateProvider>
+      <ContextProvider>
+      <BrowserRouter>
+        <Header />
         <Switch>
-          
-          <Route exact path = "/" component = {Landing}></Route>
-          <Route exact path = "/login" component = {Login_smart}></Route>
-          <Route exact path = "/signup" component = {SignUp}></Route>
-          <AuthComponent>
-          <Route exact path = "/Dashboard" component = {Dashboard}></Route>
-          </AuthComponent>
-       </Switch>
-      </div>
-    )
-  }
-} 
+              <Route exact path= '/' component={Home} />
+        </Switch>
+        </BrowserRouter>
+      </ContextProvider>
+    </TemplateProvider>
+    
+  );
+}
+
+export default App;
